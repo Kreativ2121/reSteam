@@ -1,0 +1,22 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Emplomatic v.0.1">
+    <output-path>$PROJECT_DIR$/out/artifacts/Emplomatic_v_0_1</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="main.emplomatic.Main" />
+        <option name="description" value="" />
+        <option name="height" value="800" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="Emplomatic" />
+        <option name="vendor" value="Emplomatic Team" />
+        <option name="version" value="" />
+        <option name="width" value="1280" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Frontend_Java_Project.jar">
+        <element id="module-output" name="reSteam" />
+      </element>
+    </root>
+  </artifact>
+</component>
