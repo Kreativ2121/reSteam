@@ -20,7 +20,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="9">
-      <module name="reSteam" target="1.8" />
+      <module name="reSteam" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

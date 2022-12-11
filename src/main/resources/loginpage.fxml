@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resteam.LoginController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resteam.LoginController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>
@@ -58,15 +58,10 @@
     </MenuBar>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="322.0" prefWidth="594.0" VBox.vgrow="ALWAYS">
          <children>
-            <Polygon fill="#2aa76f" layoutX="150.0" layoutY="583.0" points="-157.0, 187.0, 233.0, 187.0, 27.0, -583.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Polygon fill="#2aa76f" layoutX="154.0" layoutY="593.0" points="-154.0, -593.0, 24.0, -593.0, -154.0, 177.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Polygon fill="#2aa76f" layoutX="1256.0" layoutY="598.0" points="-221.0, -598.0, 24.0, -598.0, 24.0, 169.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <Button layoutX="728.0" layoutY="506.0" mnemonicParsing="false" onAction="#submit" prefHeight="30.0" prefWidth="131.0" text="Submit" />
-            <Text layoutX="218.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login." textOrigin="CENTER">
-               <font>
-                  <Font name="Segoe UI Bold" size="70.0" />
-               </font>
-            </Text>
+            <Polygon fill="#393185" layoutX="150.0" layoutY="583.0" points="-157.0, 187.0, 233.0, 187.0, 27.0, -583.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Polygon fill="#393185" layoutX="154.0" layoutY="593.0" points="-154.0, -593.0, 24.0, -593.0, -154.0, 177.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Polygon fill="#393185" layoutX="1256.0" layoutY="598.0" points="-221.0, -598.0, 24.0, -598.0, 24.0, 169.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Button layoutX="574.0" layoutY="507.0" mnemonicParsing="false" onAction="#submit" prefHeight="30.0" prefWidth="131.0" text="Submit" />
             <TextField id="email" fx:id="loginField" layoutX="422.0" layoutY="368.0" prefHeight="46.0" prefWidth="437.0" promptText="E-mail address" />
             <PasswordField id="password" fx:id="passwordField" layoutX="422.0" layoutY="444.0" prefHeight="46.0" prefWidth="437.0" promptText="Password" />
             <Text layoutX="422.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-mail">
@@ -79,9 +74,9 @@
                   <Font name="Segoe UI Bold" size="20.0" />
                </font>
             </Text>
-            <ImageView fitHeight="184.0" fitWidth="178.0" layoutX="552.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="231.0" fitWidth="274.0" layoutX="525.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@logo_small_2.png" />
+                  <Image url="@reSteam-blue-cont.png" />
                </image>
             </ImageView>
          </children>

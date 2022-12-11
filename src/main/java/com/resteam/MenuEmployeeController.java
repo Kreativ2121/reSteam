@@ -43,7 +43,7 @@ public class MenuEmployeeController {
     @FXML
     void initialize(){
         //System.out.println("Name: ");
-        NameLabel.setText(Main.loggedUser.getName() + "!");
+        //NameLabel.setText(Main.loggedUser.getName() + "!");
     }
 
 /*    button.setOnAction(new EventHandler() {

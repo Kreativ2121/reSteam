@@ -11,7 +11,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import org.apache.commons.lang3.StringUtils;
+import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
+
+import java.util.Objects;
+
+import static com.resteam.CognitoLogon.getCredsForIdentity;
+import static com.resteam.CognitoLogon.initiateAuth;
 
 public class LoginController {
 
@@ -30,39 +37,9 @@ public class LoginController {
         protected Controller.User call() throws Exception {
             Controller.User user = new Controller.User();
 
-            try {
-                Gson gson = new Gson();
-                //Main.userType = gson.fromJson(Controller.readUrl(Main.REST + "/LoginInfo/" + Main.login), Controller.UserType.class);
+            //TODO FETCH AND SHOW USER DATA
 
-                user = gson.fromJson(Controller.readUrl(Main.REST + Main.token + "/users/" + Main.userType.getId() + "/general"), Controller.User.class);
-            }
-            catch (Exception e) {
-                System.err.println("Could not parse user data.");
-                e.printStackTrace();
-            }
             return user;
-        }
-    };
-
-    /**
-     * Task to fetch employer details from JSONURL.
-     */
-    public Task<Controller.Employer> fetchEmployer = new Task() {
-
-        @Override
-        protected Controller.Employer call() throws Exception {
-            Controller.Employer employer = new Controller.Employer();
-
-            try {
-                Gson gson = new Gson();
-
-                employer = gson.fromJson(Controller.readUrl(Main.REST + Main.token + "/employers/" + Main.userType.getId() + "/general"), Controller.Employer.class);
-            }
-            catch (Exception e) {
-                System.err.println("Could not parse employer data.");
-                e.printStackTrace();
-            }
-            return employer;
         }
     };
 
@@ -75,37 +52,34 @@ public class LoginController {
         @Override
         protected String call() throws Exception {
             try {
-                //Parsing data from textFields
                 Main.login=loginField.getText();
                 Main.password=passwordField.getText();
 
                 System.out.println("Login: " + Main.login);
                 System.out.println("Password: " + Main.password);
 
-                //Checking if a user is registered in a database
-                Gson gson = new Gson();
-                try {
-                    Main.userType = gson.fromJson(Controller.readUrl(Main.REST + "/UserType/" + Main.login), Controller.UserType.class);
-                }
-                catch (JsonSyntaxException e)
-                {
+                //Authentication
+                InitiateAuthResponse response = initiateAuth(Main.cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v",Main.login,Main.password);
+
+                if(response == null){
+                    //TODO Ustawić wartość labela na ekranie na "Wrong login credentials."
                     return null;
                 }
 
-                String tempToken;
-                if (Main.userType.getType().equals("Employer")) {
-                    tempToken = Controller.readUrlConnection("https://auth-server-emplomatic.herokuapp.com/Employer/?Login=" + Main.login + "&Password=" + Main.password);
+                if(response.challengeNameAsString() == null)
+                {
+                    System.out.println("User authenticated successfully.");
+                } else {
+                    System.out.println("User needs further authentication!");
+                    //TODO Further authentication
                 }
-                else {
-                    tempToken = Controller.readUrlConnection("https://auth-server-emplomatic.herokuapp.com/User/?Login=" + Main.login + "&Password=" + Main.password);
-                }
-                tempToken = StringUtils.remove(tempToken, '"');
-                System.out.println("Token: " + tempToken);
+
+                String tempToken = "TempNull";
 
                 return tempToken;
             }
             catch (Exception e) {
-                System.err.println("Could not authenticate user.");
+                System.err.println("Could not authenticate user!");
                 e.printStackTrace();
                 return null;
             }
@@ -130,31 +104,32 @@ public class LoginController {
 
                         //Handling proper login credentials
                         if(Main.token!=null && !(Main.token.isEmpty())) {
-                            System.out.println("User/Employer authenticated successfully.");
+                            //TODO Przerzucić to do thread!
+                            Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("menu_employee.fxml")));
 
-                            Thread th;
-                            if (Main.userType.getType().equals("Employer")) {
-                                th = new Thread(fetchEmployer);
-                            }
-                            else {
-                                th = new Thread(fetchUser);
-                            }
-                            th.setDaemon(true);
-                            th.start();
+//                            Thread th;
+//                            if (Main.userType.getType().equals("Employer")) {
+//                                th = new Thread(fetchEmployer);
+//                            }
+//                            else {
+//                                th = new Thread(fetchUser);
+//                            }
+//                            th.setDaemon(true);
+//                            th.start();
                         }
                         else
                         {
                             //Handling wrong password.
-                            //TODO Make a proper reaction for wrong login credentials.
-                            System.err.println("Wrong login credentials. Please try again.");
-                            Main.root = FXMLLoader.load(getClass().getResource("../../../resources/loginpage.fxml"));
-                            Main.stage.close();
-                            Main.stage.setTitle("Emplomatic");
-                            Main.stage.setScene(new Scene(Main.root, 1280, 800));
-                            Main.stage.show();
+                            //System.err.println("Wrong login credentials. Please try again.");
+                            Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("loginpage.fxml")));
                         }
+                        Main.stage.close();
+                        Main.stage.setTitle("reSteam");
+                        Main.stage.getIcons().add(new Image("reSteam_icon.png"));
+                        Main.stage.setScene(new Scene(Main.root, 1280, 720));
+                        Main.stage.show();
                     } catch (Exception e) {
-                        System.err.println("Database access denied.");
+                        System.err.println("Access denied.");
                         e.printStackTrace();
                     }
                 }
@@ -162,13 +137,13 @@ public class LoginController {
 
             authenticateUser.setOnRunning(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
-                    System.out.println("Trying to authenticate user/employer.");
+                    System.out.println("Trying to authenticate user...");
                 }
             });
 
             authenticateUser.setOnFailed(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
-                    System.err.println("Cannot authenticate user.");
+                    System.err.println("Cannot authenticate user!");
                 }
             });
 
@@ -192,7 +167,7 @@ public class LoginController {
 
                         Main.root = FXMLLoader.load(getClass().getResource("../../../resources/menu_employee.fxml"));
                         Main.stage.close();
-                        Main.stage.setTitle("Emplomatic");
+                        Main.stage.setTitle("reSteam");
                         Main.stage.setScene(new Scene(Main.root, 1280, 800));
                         Main.stage.show();
 
@@ -210,55 +185,12 @@ public class LoginController {
             });
             fetchUser.setOnFailed(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
-                    System.err.println("Unable to connect to Emplomatic database.");
+                    System.err.println("Unable to connect to reSteam database!");
                 }
             });
-
-            /** fetchEmployer task functions **/
-            fetchEmployer.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                public void handle(WorkerStateEvent t) {
-                    //Fetching user data from REST after successful authentication
-                    System.out.println("Finished fetching employer data from REST server.");
-                    try {
-                        Main.loggedEmployer = fetchEmployer.getValue();
-
-                        //DEBUG UserType
-                        System.out.println("User-ID: " + Main.userType.getId());
-                        System.out.println("UserType: " + Main.userType.getType());
-                        //DEBUG Employer
-                        System.out.println("ID: " + Main.loggedEmployer.getId());
-                        System.out.println("Company Name: " + Main.loggedEmployer.getCompanyName());
-                        System.out.println("Phone: " + Main.loggedEmployer.getCorrespondingNumber());
-                        System.out.println("E-mail: " + Main.loggedEmployer.getEmail());
-
-
-                        Main.root = FXMLLoader.load(getClass().getResource("../../../resources/menu_employer.fxml"));
-                        Main.stage.close();
-                        Main.stage.setTitle("Emplomatic");
-                        Main.stage.setScene(new Scene(Main.root, 1280, 800));
-                        Main.stage.show();
-
-                    } catch (Exception e) {
-                        System.err.println("There was a problem with parsing data from REST server.");
-                        e.printStackTrace();
-                    }
-                }
-            });
-
-            fetchEmployer.setOnRunning(new EventHandler<WorkerStateEvent>() {
-                public void handle(WorkerStateEvent t) {
-                    System.out.println("Fetching employer data from REST server.");
-                }
-            });
-            fetchEmployer.setOnFailed(new EventHandler<WorkerStateEvent>() {
-                public void handle(WorkerStateEvent t) {
-                    System.err.println("Unable to connect to Emplomatic database.");
-                }
-            });
-
         }
         catch (Exception e){
-            System.err.println("Could not send data to authentication server.");
+            System.err.println("Could not send data to authentication server!");
         }
     }
 }
