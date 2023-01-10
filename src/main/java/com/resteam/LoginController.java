@@ -2,6 +2,8 @@ package com.resteam;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -9,9 +11,11 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
 import org.apache.commons.lang3.StringUtils;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
 
@@ -23,7 +27,10 @@ import static com.resteam.CognitoLogon.initiateAuth;
 public class LoginController {
 
     @FXML
-    private TextField loginField;
+    private Label errorField;
+
+    @FXML
+    private TextField usernameField;
 
     @FXML
     private PasswordField passwordField;
@@ -52,7 +59,7 @@ public class LoginController {
         @Override
         protected String call() throws Exception {
             try {
-                Main.login=loginField.getText();
+                Main.login=usernameField.getText();
                 Main.password=passwordField.getText();
 
                 System.out.println("Login: " + Main.login);
@@ -105,7 +112,7 @@ public class LoginController {
                         //Handling proper login credentials
                         if(Main.token!=null && !(Main.token.isEmpty())) {
                             //TODO Przerzucić to do thread!
-                            Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("menu_employee.fxml")));
+                            Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("suggestions.fxml")));
 
 //                            Thread th;
 //                            if (Main.userType.getType().equals("Employer")) {
@@ -128,6 +135,17 @@ public class LoginController {
                         Main.stage.getIcons().add(new Image("reSteam_icon.png"));
                         Main.stage.setScene(new Scene(Main.root, 1280, 720));
                         Main.stage.show();
+
+                        //ver1
+                        //Platform.runLater(() -> errorField.setText("Wrong login credentials."));
+
+                        //ver2
+//                        PauseTransition wait = new PauseTransition(Duration.seconds(1));
+//                        wait.setOnFinished((e) -> {
+//                            errorField.setText("Wrong login credentials.");
+//                            wait.playFromStart();
+//                        });
+
                     } catch (Exception e) {
                         System.err.println("Access denied.");
                         e.printStackTrace();
@@ -144,12 +162,14 @@ public class LoginController {
             authenticateUser.setOnFailed(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
                     System.err.println("Cannot authenticate user!");
+                    //errorField.setText("Wrong login credentials.");
                 }
             });
 
             /** fetchUser task functions **/
             fetchUser.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
+                    //TODO LEGACY CODE FOR WHEN TWO TYPES OF USERS EXIST -> DELETE IF NOT NEEDED
                     //Fetching user data from REST after successful authentication
                     System.out.println("Finished fetching user data from REST server.");
                     try {
@@ -165,7 +185,7 @@ public class LoginController {
                         System.out.println("E-mail: " + Main.loggedUser.getEmail());
 
 
-                        Main.root = FXMLLoader.load(getClass().getResource("../../../resources/menu_employee.fxml"));
+                        Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("../../../resources/suggestions.fxml")));
                         Main.stage.close();
                         Main.stage.setTitle("reSteam");
                         Main.stage.setScene(new Scene(Main.root, 1280, 800));
@@ -193,5 +213,11 @@ public class LoginController {
             System.err.println("Could not send data to authentication server!");
         }
     }
+
+//    @FXML
+//    void initialize(){
+//        errorField.setText("Wrong login credentials.");
+//    }
+
 }
 
