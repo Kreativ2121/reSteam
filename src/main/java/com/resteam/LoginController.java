@@ -127,10 +127,9 @@ public class LoginController {
                         else
                         {
                             //Handling wrong password.
-                            //System.err.println("Wrong login credentials. Please try again.");
                             Main.wasLoginFailed = true;
                             Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("loginpage.fxml")));
-                            //Platform.runLater(() -> errorField.setText("Wrong login credentials."));
+                            //Platform.runLater(() -> errorField.setText("Wrong login credentials.")); //Może być przydatne do ładowania rekomendacji
                         }
                         Main.stage.close();
                         Main.stage.setTitle("reSteam");
@@ -154,7 +153,6 @@ public class LoginController {
             authenticateUser.setOnFailed(new EventHandler<WorkerStateEvent>() {
                 public void handle(WorkerStateEvent t) {
                     System.err.println("Cannot authenticate user!");
-                    //errorField.setText("Wrong login credentials.");
                 }
             });
 
