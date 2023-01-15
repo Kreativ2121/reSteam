@@ -28,6 +28,8 @@ public class Main extends Application {
     public static final String REST = "http://emplomaticrest-env.eba-52wvzx9s.us-east-1.elasticbeanstalk.com/";
     public static String token;
 
+    public static boolean wasLoginFailed = false;
+
     public CognitoIdentityClient cognitoClient;
     public static CognitoIdentityProviderClient cognitoProviderClient;
 

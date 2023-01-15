@@ -113,7 +113,7 @@ public class LoginController {
                         if(Main.token!=null && !(Main.token.isEmpty())) {
                             //TODO Przerzucić to do thread!
                             Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("suggestions.fxml")));
-
+                            Main.wasLoginFailed = false;
 //                            Thread th;
 //                            if (Main.userType.getType().equals("Employer")) {
 //                                th = new Thread(fetchEmployer);
@@ -128,23 +128,15 @@ public class LoginController {
                         {
                             //Handling wrong password.
                             //System.err.println("Wrong login credentials. Please try again.");
+                            Main.wasLoginFailed = true;
                             Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("loginpage.fxml")));
+                            //Platform.runLater(() -> errorField.setText("Wrong login credentials."));
                         }
                         Main.stage.close();
                         Main.stage.setTitle("reSteam");
                         Main.stage.getIcons().add(new Image("reSteam_icon.png"));
                         Main.stage.setScene(new Scene(Main.root, 1280, 720));
                         Main.stage.show();
-
-                        //ver1
-                        //Platform.runLater(() -> errorField.setText("Wrong login credentials."));
-
-                        //ver2
-//                        PauseTransition wait = new PauseTransition(Duration.seconds(1));
-//                        wait.setOnFinished((e) -> {
-//                            errorField.setText("Wrong login credentials.");
-//                            wait.playFromStart();
-//                        });
 
                     } catch (Exception e) {
                         System.err.println("Access denied.");
@@ -214,10 +206,14 @@ public class LoginController {
         }
     }
 
-//    @FXML
-//    void initialize(){
-//        errorField.setText("Wrong login credentials.");
-//    }
+    @FXML
+    void initialize(){
+        if(Main.wasLoginFailed){
+            errorField.setText("Wrong login credentials.");
+        } else {
+            errorField.setText("");
+        }
+    }
 
 }
 
