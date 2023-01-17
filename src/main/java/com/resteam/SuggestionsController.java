@@ -1,47 +1,106 @@
 package com.resteam;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class SuggestionsController {
-
     @FXML
     private Label customer_name;
-
     @FXML
     private Label desc_snippet;
-
     @FXML
     private Button download;
-
     @FXML
     private Label game_description;
-
     @FXML
     private Label game_details;
-
     @FXML
     private Label game_name;
-
     @FXML
     private ListView<String> games_list;
-
     @FXML
     private Label minimum_requirements;
-
     @FXML
     private Label original_price;
-
     @FXML
-    private Label publisher;
-
+    private Label discount_price;
+    @FXML
+    private Label developer;
     @FXML
     private Label recommended_requirements;
-
     @FXML
     private Label release_date;
+
+
+    @FXML
+    void onGameListClicked(MouseEvent event) {
+        //System.out.println("Clicked on: " + games_list.getSelectionModel().getSelectedItem());
+
+        try (PreparedStatement statement = Main.connection.prepareStatement("""
+            SELECT `desc_snippet`,`url`,`game_description`,`game_details`,`name`, `minimum_requirements`,\s
+            `original_price`, `discount_price`, `publisher`, `recommended_requirements`, `release_date`\s
+            FROM resteam.steam_games WHERE `name` = ?;""")) {
+            statement.setString(1, games_list.getSelectionModel().getSelectedItem());
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Main.selection.setDesc_snippet(resultSet.getString(1));
+                Main.selection.setDownload(resultSet.getString(2));
+                Main.selection.setGame_description(resultSet.getString(3));
+                Main.selection.setGame_details(resultSet.getString(4));
+                Main.selection.setGame_name(resultSet.getString(5));
+                Main.selection.setMinimum_requirements(resultSet.getString(6));
+                Main.selection.setOriginal_price(resultSet.getString(7));
+                Main.selection.setDiscount_price(resultSet.getString(8));
+                Main.selection.setDeveloper(resultSet.getString(9));
+                Main.selection.setRecommended_requirements(resultSet.getString(10));
+                Main.selection.setRelease_date(resultSet.getString(11));
+
+                desc_snippet.setText(Main.selection.getDesc_snippet());
+                //download.setText(Main.selection.());
+                game_description.setText(Main.selection.getGame_description());
+                game_details.setText(Main.selection.getGame_details());
+                game_name.setText(Main.selection.getGame_name());
+                minimum_requirements.setText(Main.selection.getMinimum_requirements());
+                if(!Objects.equals(Main.selection.getOriginal_price(), "")){
+                    original_price.setText(Main.selection.getOriginal_price());
+                } else {
+                    original_price.setText("No data.");
+                }
+                if(!Objects.equals(Main.selection.getDiscount_price(), "")){
+                    discount_price.setText(Main.selection.getDiscount_price());
+                }else{
+                    discount_price.setText("No data.");
+                }
+                developer.setText(Main.selection.getDeveloper());
+                recommended_requirements.setText(Main.selection.getRecommended_requirements());
+                release_date.setText(Main.selection.getRelease_date());
+
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+//    @FXML
+//    games_list.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//
+//        @Override
+//        public void handle(MouseEvent event) {
+//            System.out.println("clicked on " + games_list.getSelectionModel().getSelectedItem());
+//        }
+//    });
+
 
     @FXML
     void initialize(){

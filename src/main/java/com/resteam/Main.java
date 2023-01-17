@@ -29,13 +29,16 @@ public class Main extends Application {
     public static Controller.UserType userType = new Controller.UserType();
     public static String login;
     public static String password;
-    public static final String REST = "http://emplomaticrest-env.eba-52wvzx9s.us-east-1.elasticbeanstalk.com/";
     public static String token;
 
-    public Connection connection;
+    //Database variables
+    public static Connection connection;
+    static SelectedGame selection;
 
+    //Boolean for login error message
     public static boolean wasLoginFailed = false;
 
+    //AWS Cognito variables
     public CognitoIdentityClient cognitoClient;
     public static CognitoIdentityProviderClient cognitoProviderClient;
 
@@ -55,7 +58,7 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
 
-        SelectedGame selection = new SelectedGame();
+        selection = new SelectedGame();
 
         //Launching Cognito Identity Client
          cognitoClient = CognitoIdentityClient.builder()
