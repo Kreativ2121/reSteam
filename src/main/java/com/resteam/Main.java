@@ -13,6 +13,10 @@ import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
 import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClientBuilder;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Objects;
 
 import static com.resteam.CognitoLogon.*;
@@ -49,6 +53,8 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
 
+        SelectedGame selection = new SelectedGame();
+
         //Launching Cognito Identity Client
          cognitoClient = CognitoIdentityClient.builder()
                 .region(Region.EU_WEST_1)
@@ -70,6 +76,35 @@ public class Main extends Application {
 //
 //        //initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","Nowehaslo123@");
 //        initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","errorhaselko");
+
+        //Połączenie z DB
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mariadb://resteam-db2.cysgqma8u6h9.eu-central-1.rds.amazonaws.com:3306/resteam",
+                "resteam", "H54z1$9uP$H"
+        );
+
+        try (PreparedStatement statement = connection.prepareStatement("""
+            SELECT `desc_snippet`,`url`,`game_description`,`game_details`,`name`, `minimum_requirements`,\s
+            `original_price`, `discount_price`, `publisher`, `recommended_requirements`, `release_date`\s
+            FROM resteam.steam_games WHERE `name` = "DOOM";
+        """)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                selection.setDesc_snippet(resultSet.getString(1));
+                selection.setDownload(resultSet.getString(2));
+                selection.setGame_description(resultSet.getString(3));
+                selection.setGame_details(resultSet.getString(4));
+                selection.setGame_name(resultSet.getString(5));
+                selection.setMinimum_requirements(resultSet.getString(6));
+                selection.setOriginal_price(resultSet.getString(7));
+                selection.setDiscount_price(resultSet.getString(8));
+                selection.setDeveloper(resultSet.getString(9));
+                selection.setRecommended_requirements(resultSet.getString(10));
+                selection.setRelease_date(resultSet.getString(11));
+            }
+        }
+
+        System.out.println("Finished startup...");
     }
 
     public static void main(String[] args) {
