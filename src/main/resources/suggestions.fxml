@@ -161,7 +161,7 @@
                                                           <RowConstraints maxHeight="75.79997863769532" minHeight="10.0" prefHeight="74.99999084472657" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
-                                                            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="\$14.99" textFill="RED" GridPane.rowIndex="1">
+                                                            <Label fx:id="discount_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="\$14.99" textFill="RED" GridPane.rowIndex="1">
                                                                <font>
                                                                   <Font size="18.0" />
                                                                </font>
@@ -198,7 +198,7 @@
                                                             <Insets right="5.0" />
                                                          </GridPane.margin>
                                                       </GridPane>
-                                                      <Label id="publisher" fx:id="publisher" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bethesda Softworks" wrapText="true" GridPane.rowIndex="1">
+                                                      <Label id="publisher" fx:id="developer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bethesda Softworks" wrapText="true" GridPane.rowIndex="1">
                                                          <GridPane.margin>
                                                             <Insets />
                                                          </GridPane.margin>

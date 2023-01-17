@@ -43,4 +43,14 @@ public class SuggestionsController {
     @FXML
     private Label release_date;
 
+    @FXML
+    void initialize(){
+        customer_name.setText(Main.login + "!");
+//        if(Main.wasLoginFailed){
+//            errorField.setText("Wrong login credentials.");
+//        } else {
+//            errorField.setText("");
+//        }
+    }
+
 }
