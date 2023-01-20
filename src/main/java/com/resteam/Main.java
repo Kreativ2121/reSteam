@@ -87,39 +87,11 @@ public class Main extends Application {
                 .withRegion(Regions.EU_WEST_1)
                 .build();
 
-        //Testy Cognito
-//        listAllUserPools(cognitoProviderClient);
-//        listAllUsers(cognitoProviderClient,"eu-west-1_gAc2ZYDy2");
-//        getAdminUser(cognitoProviderClient,"kowalski","eu-west-1_gAc2ZYDy2");
-//        //initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","Nowehaslo123@");
-//        initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","errorhaselko");
-
         //Połączenie z DB
         connection = DriverManager.getConnection(
                 "jdbc:mariadb://resteam-db2.cysgqma8u6h9.eu-central-1.rds.amazonaws.com:3306/resteam",
                 "resteam", "H54z1$9uP$H"
         );
-
-//        try (PreparedStatement statement = connection.prepareStatement("""
-//            SELECT `desc_snippet`,`url`,`game_description`,`game_details`,`name`, `minimum_requirements`,\s
-//            `original_price`, `discount_price`, `publisher`, `recommended_requirements`, `release_date`\s
-//            FROM resteam.steam_games WHERE `name` = "DOOM";
-//        """)) {
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                selection.setDesc_snippet(resultSet.getString(1));
-//                selection.setDownload(resultSet.getString(2));
-//                selection.setGame_description(resultSet.getString(3));
-//                selection.setGame_details(resultSet.getString(4));
-//                selection.setGame_name(resultSet.getString(5));
-//                selection.setMinimum_requirements(resultSet.getString(6));
-//                selection.setOriginal_price(resultSet.getString(7));
-//                selection.setDiscount_price(resultSet.getString(8));
-//                selection.setDeveloper(resultSet.getString(9));
-//                selection.setRecommended_requirements(resultSet.getString(10));
-//                selection.setRelease_date(resultSet.getString(11));
-//            }
-//        }
 
         System.out.println("Finished startup...");
     }
