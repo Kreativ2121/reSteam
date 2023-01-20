@@ -106,6 +106,17 @@ public class SuggestionsController {
     void initialize(){
         customer_name.setText(Main.login + "!");
 
+        desc_snippet.setText("");
+        game_description.setText("");
+        game_details.setText("");
+        game_name.setText("");
+        minimum_requirements.setText("");
+        original_price.setText("");
+        discount_price.setText("");
+        developer.setText("");
+        recommended_requirements.setText("");
+        release_date.setText("");
+
         //TODO Mock data. To be replaced by AWS Personalize Recommendations.
         games_list.getItems().add("DOOM");
         games_list.getItems().add("PLAYERUNKNOWN'S BATTLEGROUNDS");

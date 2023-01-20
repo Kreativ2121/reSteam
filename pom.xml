@@ -67,6 +67,13 @@
             <version>2.18.25</version>
         </dependency>
 
+        <!-- AMAZON TRANSLATE -->
+        <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-translate -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-translate</artifactId>
+            <version>1.12.341</version>
+        </dependency>
 
     </dependencies>
 

@@ -1,5 +1,10 @@
 package com.resteam;
 
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.translate.AmazonTranslate;
+import com.amazonaws.services.translate.AmazonTranslateClient;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,6 +47,8 @@ public class Main extends Application {
     public CognitoIdentityClient cognitoClient;
     public static CognitoIdentityProviderClient cognitoProviderClient;
 
+    public static AmazonTranslate translateClient;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Loading the login stage
@@ -58,6 +65,7 @@ public class Main extends Application {
         stage.setScene(new Scene(root, 1280, 720));
         stage.show();
 
+        //Setting up game's data for selection on suggestions screen
         selection = new SelectedGame();
 
         //Launching Cognito Identity Client
@@ -66,19 +74,23 @@ public class Main extends Application {
                 .credentialsProvider(ProfileCredentialsProvider.create())
                 .build();
 
+        //Launching Cognito Provider Client
         cognitoProviderClient = CognitoIdentityProviderClient.builder()
                 .region(Region.EU_WEST_1)
                 .credentialsProvider(ProfileCredentialsProvider.create())
                 .build();
 
+        //Launching Amazon Translate Client
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAXLBUHGXL654LLVPN", "3P+xPGAeoK9ndjRRFl75XLbGIooxAHyyqZP8AJvT");
+        translateClient = AmazonTranslateClient.builder()
+                .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+                .withRegion(Regions.EU_WEST_1)
+                .build();
 
         //Testy Cognito
 //        listAllUserPools(cognitoProviderClient);
-//
 //        listAllUsers(cognitoProviderClient,"eu-west-1_gAc2ZYDy2");
-//
 //        getAdminUser(cognitoProviderClient,"kowalski","eu-west-1_gAc2ZYDy2");
-//
 //        //initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","Nowehaslo123@");
 //        initiateAuth(cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v","kowalski","errorhaselko");
 
