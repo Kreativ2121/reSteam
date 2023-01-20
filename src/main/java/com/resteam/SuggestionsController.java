@@ -1,5 +1,7 @@
 package com.resteam;
 
+import com.amazonaws.services.translate.model.TranslateTextRequest;
+import com.amazonaws.services.translate.model.TranslateTextResult;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -53,6 +55,7 @@ public class SuggestionsController {
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
+                //Download data about games
                 Main.selection.setDesc_snippet(resultSet.getString(1));
                 Main.selection.setDownload(resultSet.getString(2));
                 Main.selection.setGame_description(resultSet.getString(3));
@@ -65,6 +68,20 @@ public class SuggestionsController {
                 Main.selection.setRecommended_requirements(resultSet.getString(10));
                 Main.selection.setRelease_date(resultSet.getString(11));
 
+                //Translate game description
+                TranslateTextRequest request = new TranslateTextRequest()
+                        .withText(Main.selection.getGame_description())
+                        .withSourceLanguageCode("en")
+                        .withTargetLanguageCode("pl");
+
+                TranslateTextResult result = Main.translateClient.translateText(request);
+                Main.selection.setGame_description(result.getTranslatedText());
+
+                //DEBUG
+                //System.out.println(result.getTranslatedText());
+                //-----Uncomment above lines to disable translate
+
+                //Set data about games in UI
                 desc_snippet.setText(Main.selection.getDesc_snippet());
                 //download.setText(Main.selection.());
                 game_description.setText(Main.selection.getGame_description());
@@ -91,16 +108,6 @@ public class SuggestionsController {
         }
 
     }
-
-//    @FXML
-//    games_list.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//
-//        @Override
-//        public void handle(MouseEvent event) {
-//            System.out.println("clicked on " + games_list.getSelectionModel().getSelectedItem());
-//        }
-//    });
-
 
     @FXML
     void initialize(){
