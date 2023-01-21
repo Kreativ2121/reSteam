@@ -14,11 +14,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import javafx.scene.image.Image;
+import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
 import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClientBuilder;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
+import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClient;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -88,6 +91,16 @@ public class Main extends Application {
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .withRegion(Regions.EU_WEST_1)
                 .build();
+
+        //Launching Amazon Personalize Client
+        AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("AKIAXLBUHGXL654LLVPN","3P+xPGAeoK9ndjRRFl75XLbGIooxAHyyqZP8AJvT");
+        PersonalizeRuntimeClient personalizeRuntimeClient = PersonalizeRuntimeClient.builder()
+                .region(Region.EU_WEST_1)
+                .credentialsProvider(StaticCredentialsProvider.create(awsCredsPersonalize))
+                .build();
+
+        //TODO TESTY PERSONALIZE
+        //getRecs(personalizeRuntimeClient,"arn:aws:personalize:eu-central-1:504768181719:campaign/movieLensCampaign", "125");
 
         //Połączenie z DB
         connection = DriverManager.getConnection(
