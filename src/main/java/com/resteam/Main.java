@@ -30,6 +30,7 @@ import java.sql.ResultSet;
 import java.util.Objects;
 
 import static com.resteam.CognitoLogon.*;
+import static com.resteam.PersonalizeRecommendations.getRecs;
 import static software.amazon.awssdk.services.cognitoidentityprovider.model.UserStatusType.FORCE_CHANGE_PASSWORD;
 
 public class Main extends Application {
