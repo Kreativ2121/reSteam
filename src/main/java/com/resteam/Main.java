@@ -94,7 +94,7 @@ public class Main extends Application {
                 .build();
 
         //Launching Amazon Personalize Client
-        AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("AKIAXLBUHGXL654LLVPN","3P+xPGAeoK9ndjRRFl75XLbGIooxAHyyqZP8AJvT");
+        AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("AKIASGRG7TB7UWVMWHFR","Sqp+WaiRL8bRHflSCwIKuw+qBSEq1blh/qnsUvCT");
         PersonalizeRuntimeClient personalizeRuntimeClient = PersonalizeRuntimeClient.builder()
                 .region(Region.EU_WEST_1)
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredsPersonalize))
