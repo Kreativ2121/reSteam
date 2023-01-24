@@ -44,8 +44,6 @@ public class LoginController {
         protected Controller.User call() throws Exception {
             Controller.User user = new Controller.User();
 
-            //TODO FETCH AND SHOW USER DATA
-
             return user;
         }
     };
@@ -69,7 +67,6 @@ public class LoginController {
                 InitiateAuthResponse response = initiateAuth(Main.cognitoProviderClient,"719ljiqmgmrna7aoldjnuqo71v",Main.login,Main.password);
 
                 if(response == null){
-                    //TODO Ustawić wartość labela na ekranie na "Wrong login credentials."
                     return null;
                 }
 
@@ -111,7 +108,6 @@ public class LoginController {
 
                         //Handling proper login credentials
                         if(Main.token!=null && !(Main.token.isEmpty())) {
-                            //TODO Przerzucić to do thread!
                             Main.root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("suggestions.fxml")));
                             Main.wasLoginFailed = false;
 //                            Thread th;

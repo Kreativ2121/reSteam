@@ -22,7 +22,7 @@ public class CognitoLogon {
 
         try {
             GetCredentialsForIdentityRequest getCredentialsForIdentityRequest = GetCredentialsForIdentityRequest.builder()
-                    .identityId(identityId) //TODO Ta wartość to jakieś amazonowe ID. Znaleźć szukajkę po username.
+                    .identityId(identityId)
                     .build();
 
             GetCredentialsForIdentityResponse response = cognitoClient.getCredentialsForIdentity(getCredentialsForIdentityRequest);
