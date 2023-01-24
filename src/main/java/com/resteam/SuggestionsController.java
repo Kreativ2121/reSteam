@@ -20,9 +20,13 @@ public class SuggestionsController {
     @FXML
     private Label desc_snippet;
     @FXML
+    private Label desc_snippet_tr;
+    @FXML
     private Button download;
     @FXML
     private Label game_description;
+    @FXML
+    private Label game_description_tr;
     @FXML
     private Label game_details;
     @FXML
@@ -68,14 +72,22 @@ public class SuggestionsController {
                 Main.selection.setRecommended_requirements(resultSet.getString(10));
                 Main.selection.setRelease_date(resultSet.getString(11));
 
+                //Translate game description snippet
+                TranslateTextRequest requestSnippetTranslation = new TranslateTextRequest()
+                        .withText(Main.selection.getDesc_snippet())
+                        .withSourceLanguageCode("en")
+                        .withTargetLanguageCode("pl");
+
+                TranslateTextResult resultSnippetTranslation = Main.translateClient.translateText(requestSnippetTranslation);
+
                 //Translate game description
-                TranslateTextRequest request = new TranslateTextRequest()
+                TranslateTextRequest requestDescriptionTranslation = new TranslateTextRequest()
                         .withText(Main.selection.getGame_description())
                         .withSourceLanguageCode("en")
                         .withTargetLanguageCode("pl");
 
-                TranslateTextResult result = Main.translateClient.translateText(request);
-                Main.selection.setGame_description(result.getTranslatedText());
+                TranslateTextResult resultDescriptionTranslation = Main.translateClient.translateText(requestDescriptionTranslation);
+//                Main.selection.setGame_description(result.getTranslatedText());
 
                 //DEBUG
                 //System.out.println(result.getTranslatedText());
@@ -83,8 +95,10 @@ public class SuggestionsController {
 
                 //Set data about games in UI
                 desc_snippet.setText(Main.selection.getDesc_snippet());
+                desc_snippet_tr.setText(resultSnippetTranslation.getTranslatedText());
                 //download.setText(Main.selection.());
                 game_description.setText(Main.selection.getGame_description());
+                game_description_tr.setText(resultDescriptionTranslation.getTranslatedText());
                 game_details.setText(Main.selection.getGame_details());
                 game_name.setText(Main.selection.getGame_name());
                 minimum_requirements.setText(Main.selection.getMinimum_requirements());
@@ -131,7 +145,7 @@ public class SuggestionsController {
         games_list.getItems().add("Golf It!");
         games_list.getItems().add("Cities: Skylines Collection");
         games_list.getItems().add("UNO");
-        games_list.getItems().add("NieR:Automata™");
+        games_list.getItems().add("NieR:Automata");
         games_list.getItems().add("BeamNG.drive");
         games_list.getItems().add("Pavlov VR");
         games_list.getItems().add("Wreckfest");
@@ -141,8 +155,8 @@ public class SuggestionsController {
         games_list.getItems().add("Dota 2");
         games_list.getItems().add("Abandon Ship");
         games_list.getItems().add("rFactor 2");
-        games_list.getItems().add("Rocksmith™");
-        games_list.getItems().add("FINAL FANTASY® XIII");
+        games_list.getItems().add("Rocksmith");
+        games_list.getItems().add("FINAL FANTASY XIII");
         games_list.getItems().add("911 Operator");
         games_list.getItems().add("Mass Effect 2 Digital Deluxe Edition");
         games_list.getItems().add("GRID 2");

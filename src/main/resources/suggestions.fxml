@@ -52,7 +52,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #393185;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resteam.SuggestionsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" style="-fx-background-color: #393185;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.resteam.SuggestionsController">
   <children>
       <MenuBar />
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
@@ -112,111 +112,134 @@
                                     <content>
                                       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
                                              <children>
-                                                <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="329.6" prefWidth="424.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                  <columnConstraints>
-                                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                  </columnConstraints>
-                                                  <rowConstraints>
-                                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints maxHeight="105.60001220703126" minHeight="10.0" prefHeight="40.79998626708984" vgrow="SOMETIMES" />
-                                                      <RowConstraints maxHeight="266.4" minHeight="10.0" prefHeight="50.99999389648436" vgrow="SOMETIMES" />
-                                                      <RowConstraints maxHeight="266.4" minHeight="10.0" prefHeight="150.20000610351562" vgrow="SOMETIMES" />
-                                                      <RowConstraints maxHeight="266.4" minHeight="10.0" prefHeight="113.60001220703126" vgrow="SOMETIMES" />
-                                                    <RowConstraints maxHeight="266.4" minHeight="10.0" prefHeight="53.59998779296876" vgrow="SOMETIMES" />
-                                                  </rowConstraints>
-                                                   <children>
-                                                      <Label id="game_name" fx:id="game_name" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DOOM" textAlignment="CENTER" wrapText="true">
-                                                         <font>
-                                                            <Font name="System Bold" size="24.0" />
-                                                         </font>
-                                                         <GridPane.margin>
-                                                            <Insets />
-                                                         </GridPane.margin>
-                                                      </Label>
-                                                      <Label id="desc_snippet" fx:id="desc_snippet" alignment="TOP_LEFT" layoutX="10.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Now includes all three premium DLC packs (Unto the Evil, Hell Followed, and Bloodfall), maps, modes, and weapons, as well as all feature updates including Arcade Mode, Photo Mode, and the latest Update 6.66, which brings further multiplayer improvements as well as revamps multiplayer progression." wrapText="true" GridPane.rowIndex="3">
-                                                         <font>
-                                                            <Font size="14.0" />
-                                                         </font>
-                                                         <GridPane.margin>
-                                                            <Insets left="5.0" right="5.0" />
-                                                         </GridPane.margin>
-                                                         <padding>
-                                                            <Insets left="5.0" />
-                                                         </padding>
-                                                      </Label>
-                                                      <Label id="game_details" fx:id="game_details" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Single-player,Multi-player,Co-op,Steam Achievements,Steam Trading Cards,Partial Controller Support,Steam Cloud" wrapText="true" GridPane.rowIndex="5">
-                                                         <GridPane.margin>
-                                                            <Insets />
-                                                         </GridPane.margin>
-                                                         <padding>
-                                                            <Insets left="5.0" />
-                                                         </padding>
-                                                      </Label>
-                                                      <GridPane prefHeight="97.0" prefWidth="271.0" GridPane.rowIndex="4">
+                                                <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="5.0" layoutY="-12.0" pannable="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <content>
+                                                      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="329.6" prefWidth="424.8">
                                                         <columnConstraints>
-                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.199951171875" minWidth="10.0" prefWidth="156.79999999999998" />
+                                                          <ColumnConstraints hgrow="SOMETIMES" prefWidth="100.0" />
                                                         </columnConstraints>
                                                         <rowConstraints>
-                                                          <RowConstraints maxHeight="47.800009155273436" minHeight="10.0" prefHeight="31.800009155273436" vgrow="SOMETIMES" />
-                                                          <RowConstraints maxHeight="75.79997863769532" minHeight="10.0" prefHeight="74.99999084472657" vgrow="SOMETIMES" />
+                                                          <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                                                          <RowConstraints maxHeight="105.60001220703126" prefHeight="40.79998626708984" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="266.4" prefHeight="50.99999389648436" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="266.4" prefHeight="150.20000610351562" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="20.0" />
+                                                            <RowConstraints maxHeight="266.4" prefHeight="150.20000610351562" />
+                                                            <RowConstraints minHeight="20.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints maxHeight="266.4" prefHeight="113.60001220703126" vgrow="SOMETIMES" />
+                                                          <RowConstraints maxHeight="266.4" prefHeight="53.59998779296876" vgrow="SOMETIMES" />
                                                         </rowConstraints>
                                                          <children>
-                                                            <Label fx:id="discount_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="\$14.99" textFill="RED" GridPane.rowIndex="1">
+                                                            <Label id="game_name" fx:id="game_name" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="DOOM" textAlignment="CENTER" wrapText="true">
                                                                <font>
-                                                                  <Font size="18.0" />
+                                                                  <Font name="System Bold" size="24.0" />
                                                                </font>
                                                                <GridPane.margin>
                                                                   <Insets />
                                                                </GridPane.margin>
-                                                               <padding>
-                                                                  <Insets left="88.0" />
-                                                               </padding>
                                                             </Label>
-                                                            <Label id="original_price" fx:id="original_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-skin: 1;" text="\$19.99" wrapText="true">
+                                                            <ScrollPane fitToWidth="true" pannable="true" GridPane.rowIndex="3">
+                                                               <GridPane.margin>
+                                                                  <Insets left="5.0" right="5.0" />
+                                                               </GridPane.margin>
+                                                               <content>
+                                                                  <Label id="desc_snippet" fx:id="desc_snippet" alignment="TOP_LEFT" text="Now includes all three premium DLC packs (Unto the Evil, Hell Followed, and Bloodfall), maps, modes, and weapons, as well as all feature updates including Arcade Mode, Photo Mode, and the latest Update 6.66, which brings further multiplayer improvements as well as revamps multiplayer progression." textOverrun="CLIP" wrapText="true">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                     <padding>
+                                                                        <Insets left="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                               </content>
+                                                            </ScrollPane>
+                                                            <ScrollPane fitToWidth="true" pannable="true" GridPane.rowIndex="5">
+                                                               <content>
+                                                                  <Label id="desc_snippet" fx:id="desc_snippet_tr" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Teraz zawiera wszystkie trzy pakiety DLC premium (Unto the Evil, Hell Followed i Bloodfall), mapy, tryby i broń, a także wszystkie aktualizacje funkcji, w tym tryb Arcade, tryb fotograficzny i najnowszą aktualizację 6.66, która wprowadza dalsze ulepszenia dla wielu graczy a także modyfikuje postępy w grze wieloosobowej." textOverrun="CLIP" wrapText="true">
+                                                                     <font>
+                                                                        <Font size="14.0" />
+                                                                     </font>
+                                                                     <padding>
+                                                                        <Insets left="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                               </content>
+                                                            </ScrollPane>
+                                                            <Label id="game_details" fx:id="game_details" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Single-player,Multi-player,Co-op,Steam Achievements,Steam Trading Cards,Partial Controller Support,Steam Cloud" wrapText="true" GridPane.rowIndex="8">
                                                                <GridPane.margin>
                                                                   <Insets />
                                                                </GridPane.margin>
                                                                <padding>
-                                                                  <Insets left="80.0" />
+                                                                  <Insets left="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="207.0" text="Original price:" wrapText="true">
+                                                            <GridPane prefHeight="97.0" prefWidth="271.0" GridPane.rowIndex="7">
+                                                              <columnConstraints>
+                                                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.199951171875" minWidth="10.0" prefWidth="156.79999999999998" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints maxHeight="47.800009155273436" minHeight="10.0" prefHeight="31.800009155273436" vgrow="SOMETIMES" />
+                                                                <RowConstraints maxHeight="75.79997863769532" minHeight="10.0" prefHeight="74.99999084472657" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Label fx:id="discount_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="\$14.99" textFill="RED" GridPane.rowIndex="1">
+                                                                     <font>
+                                                                        <Font size="18.0" />
+                                                                     </font>
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                     <padding>
+                                                                        <Insets left="88.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                                  <Label id="original_price" fx:id="original_price" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-skin: 1;" text="\$19.99" wrapText="true">
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                     <padding>
+                                                                        <Insets left="80.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="207.0" text="Original price:" wrapText="true">
+                                                                     <padding>
+                                                                        <Insets left="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Discount price:" wrapText="true" GridPane.rowIndex="1">
+                                                                     <padding>
+                                                                        <Insets left="5.0" />
+                                                                     </padding>
+                                                                  </Label>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="5.0" />
+                                                               </padding>
+                                                               <GridPane.margin>
+                                                                  <Insets right="5.0" />
+                                                               </GridPane.margin>
+                                                            </GridPane>
+                                                            <Label id="publisher" fx:id="developer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bethesda Softworks" wrapText="true" GridPane.rowIndex="1">
+                                                               <GridPane.margin>
+                                                                  <Insets />
+                                                               </GridPane.margin>
                                                                <padding>
                                                                   <Insets left="5.0" />
                                                                </padding>
                                                             </Label>
-                                                            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Discount price:" wrapText="true" GridPane.rowIndex="1">
+                                                            <Label id="release_date" fx:id="release_date" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="30.0" maxWidth="1.7976931348623157E308" text="May 12, 2016" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1">
+                                                               <opaqueInsets>
+                                                                  <Insets />
+                                                               </opaqueInsets>
                                                                <padding>
-                                                                  <Insets left="5.0" />
+                                                                  <Insets right="5.0" />
                                                                </padding>
                                                             </Label>
+                                                            <Button fx:id="download" alignment="CENTER" contentDisplay="RIGHT" defaultButton="true" maxHeight="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Download" textAlignment="CENTER" underline="true" GridPane.rowIndex="2" />
                                                          </children>
-                                                         <padding>
-                                                            <Insets left="5.0" />
-                                                         </padding>
-                                                         <GridPane.margin>
-                                                            <Insets right="5.0" />
-                                                         </GridPane.margin>
                                                       </GridPane>
-                                                      <Label id="publisher" fx:id="developer" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bethesda Softworks" wrapText="true" GridPane.rowIndex="1">
-                                                         <GridPane.margin>
-                                                            <Insets />
-                                                         </GridPane.margin>
-                                                         <padding>
-                                                            <Insets left="5.0" />
-                                                         </padding>
-                                                      </Label>
-                                                      <Label id="release_date" fx:id="release_date" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="30.0" maxWidth="1.7976931348623157E308" text="May 12, 2016" textAlignment="RIGHT" wrapText="true" GridPane.rowIndex="1">
-                                                         <opaqueInsets>
-                                                            <Insets />
-                                                         </opaqueInsets>
-                                                         <padding>
-                                                            <Insets right="5.0" />
-                                                         </padding>
-                                                      </Label>
-                                                      <Button fx:id="download" alignment="CENTER" contentDisplay="RIGHT" defaultButton="true" maxHeight="40.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Pobierz" textAlignment="CENTER" underline="true" GridPane.rowIndex="2" />
-                                                   </children>
-                                                </GridPane>
+                                                   </content>
+                                                </ScrollPane>
                                              </children>
                                              <padding>
                                                 <Insets left="5.0" right="5.0" />
@@ -224,34 +247,56 @@
                                           </AnchorPane>
                                     </content>
                                   </Tab>
-                                  <Tab text="Description">
-                                    <content>
-                                          <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pannable="true" vbarPolicy="ALWAYS">
-                                             <content>
-                                                <Label id="game_description" fx:id="game_description" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text=" About This Game Developed by id software, the studio that pioneered the first-person shooter genre and created multiplayer Deathmatch, DOOM returns as a brutally fun and challenging modern-day shooter experience. Relentless demons, impossibly destructive guns, and fast, fluid movement provide the foundation for intense, first-person combat â€“ whether youâ€™re obliterating demon hordes through the depths of Hell in the single-player campaign, or competing against your friends in numerous multiplayer modes. Expand your gameplay experience using DOOM SnapMap game editor to easily create, play, and share your content with the world. STORY: Youâ€™ve come here for a reason. The Union Aerospace Corporationâ€™s massive research facility on Mars is overwhelmed by fierce and powerful demons, and only one person stands between their world and ours.  As the lone DOOM Marine, youâ€™ve been activated to do one thing â€“ kill them all. KEY FEATURES: A Relentless Campaign There is no taking cover or stopping to regenerate health as you beat back Hellâ€™s raging demon hordes.  Combine your arsenal of futuristic and iconic guns, upgrades, movement and an advanced melee system to knock-down, slash, stomp, crush, and blow apart demons in creative and violent ways. Return of id Multiplayer Dominate your opponents in DOOMâ€™s signature, fast-paced arena-style combat. In both classic and all-new game modes, annihilate your enemies utilizing your personal blend of skill, powerful weapons, vertical movement, and unique power-ups that allow you to play as a demon. Endless Possibilities DOOM SnapMap â€“ a powerful, but easy-to-use game and level editor â€“ allows for limitless gameplay experiences on every platform.  Without any previous experience or special expertise, any player can quickly and easily snap together and visually customize maps, add pre-defined or completely custom gameplay, and even edit game logic to create new modes.  Instantly play your creation, share it with a friend, or make it available to players around the world â€“ all in-game with the push of a button. " textAlignment="JUSTIFY" wrapText="true">
-                                                   <font>
-                                                      <Font size="14.0" />
-                                                   </font>
-                                                </Label>
-                                             </content>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </ScrollPane>
-                                    </content>
-                                  </Tab>
-                                    <Tab text="Requirements">
+                                    <Tab text="Description">
                                        <content>
                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <GridPane prefHeight="329.6" prefWidth="424.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="30.0" />
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
+                                                   <children>
+                                                      <ScrollPane fitToWidth="true" pannable="true">
+                                                         <content>
+                                                            <Label id="game_description" fx:id="game_description" alignment="TOP_LEFT" text=" About This Game Developed by id software, the studio that pioneered the first-person shooter genre and created multiplayer Deathmatch, DOOM returns as a brutally fun and challenging modern-day shooter experience. Relentless demons, impossibly destructive guns, and fast, fluid movement provide the foundation for intense, first-person combat â€“ whether youâ€™re obliterating demon hordes through the depths of Hell in the single-player campaign, or competing against your friends in numerous multiplayer modes. Expand your gameplay experience using DOOM SnapMap game editor to easily create, play, and share your content with the world. STORY: Youâ€™ve come here for a reason. The Union Aerospace Corporationâ€™s massive research facility on Mars is overwhelmed by fierce and powerful demons, and only one person stands between their world and ours.  As the lone DOOM Marine, youâ€™ve been activated to do one thing â€“ kill them all. KEY FEATURES: A Relentless Campaign There is no taking cover or stopping to regenerate health as you beat back Hellâ€™s raging demon hordes.  Combine your arsenal of futuristic and iconic guns, upgrades, movement and an advanced melee system to knock-down, slash, stomp, crush, and blow apart demons in creative and violent ways. Return of id Multiplayer Dominate your opponents in DOOMâ€™s signature, fast-paced arena-style combat. In both classic and all-new game modes, annihilate your enemies utilizing your personal blend of skill, powerful weapons, vertical movement, and unique power-ups that allow you to play as a demon. Endless Possibilities DOOM SnapMap â€“ a powerful, but easy-to-use game and level editor â€“ allows for limitless gameplay experiences on every platform.  Without any previous experience or special expertise, any player can quickly and easily snap together and visually customize maps, add pre-defined or completely custom gameplay, and even edit game logic to create new modes.  Instantly play your creation, share it with a friend, or make it available to players around the world â€“ all in-game with the push of a button. " textAlignment="JUSTIFY" wrapText="true">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </content>
+                                                      </ScrollPane>
+                                                      <ScrollPane fitToWidth="true" pannable="true" GridPane.rowIndex="2">
+                                                         <content>
+                                                            <Label id="game_description" fx:id="game_description_tr" alignment="TOP_LEFT" text="O tej grze, stworzony przez id software, studio, które zapoczątkowało gatunek strzelanek FPS i stworzyło wieloosobowy tryb Deathmatch, DOOM powraca jako brutalnie zabawna i wymagająca strzelanka współczesnych czasów. Nieustępliwe demony, niewiarygodnie niszczycielskie działa i szybkie, płynne ruchy stanowią podstawę intensywnych walk z perspektywy pierwszej osoby — niezależnie od tego, czy unicestwiasz hordy demonów w czeluściach piekła w kampanii dla jednego gracza, czy też rywalizujesz ze znajomymi w wielu trybach multiplayer. Wzbogać swoją rozgrywkę za pomocą edytora gier DOOM SnapMap, aby łatwo tworzyć, odtwarzać i udostępniać swoje treści całemu światu. HISTORIA: Przyszedłeś tu nie bez powodu. Ogromny ośrodek badawczy Union Aerospace Corporation na Marsie jest opanowany przez dzikie i potężne demony, a tylko jedna osoba stoi między ich światem a naszym. Jako samotny DOOM Marine zostałeś aktywowany, by zrobić jedną rzecz – zabić ich wszystkich. NAJWAŻNIEJSZE CECHY: Bezlitosna kampania Nie musisz się ukrywać ani zatrzymywać, by zregenerować zdrowie, gdy odpierasz szalejące hordy demonów piekła. Połącz swój arsenał futurystycznych i kultowych broni, ulepszeń, ruchu i zaawansowanego systemu walki wręcz, aby powalać, ciąć, deptać, miażdżyć i rozsadzać demony w kreatywny i brutalny sposób. Powrót trybu wieloosobowego id Zdominuj przeciwników w charakterystycznej dla DOOM-a szybkiej walce na arenie. Zarówno w klasycznych, jak i całkowicie nowych trybach gry, unicestwiaj wrogów, korzystając z osobistego połączenia umiejętności, potężnej broni, ruchu w pionie i unikalnych ulepszeń, które pozwalają ci grać jako demon. Nieskończone możliwości DOOM SnapMap — potężny, ale łatwy w użyciu edytor gier i poziomów — pozwala na nieograniczoną rozgrywkę na każdej platformie. Bez wcześniejszego doświadczenia lub specjalistycznej wiedzy każdy gracz może szybko i łatwo łączyć i dostosowywać wizualnie mapy, dodawać wstępnie zdefiniowaną lub całkowicie niestandardową rozgrywkę, a nawet edytować logikę gry, aby tworzyć nowe tryby. Natychmiast zagraj w swoje dzieło, podziel się nim ze znajomym lub udostępnij graczom z całego świata – wszystko w grze za naciśnięciem jednego przycisku." textAlignment="JUSTIFY" wrapText="true">
+                                                               <font>
+                                                                  <Font size="14.0" />
+                                                               </font>
+                                                            </Label>
+                                                         </content>
+                                                      </ScrollPane>
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </Tab>
+                                    <Tab text="Requirements">
+                                       <content>
+                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <GridPane prefHeight="329.6" prefWidth="424.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
                                                    <children>
                                                       <Label id="pos5" fx:id="minimum_requirements" alignment="TOP_LEFT" prefHeight="329.6" prefWidth="424.8" text="Minimum:,OS:,Windows 7/8.1/10 (64-bit versions),Processor:,Intel Core i5-2400/AMD FX-8320 or better,Memory:,8 GB RAM,Graphics:,NVIDIA GTX 670 2GB/AMD Radeon HD 7870 2GB or better,Storage:,55 GB available space,Additional Notes:,Requires Steam activation and broadband internet connection for Multiplayer and SnapMap" wrapText="true">
                                                          <font>
