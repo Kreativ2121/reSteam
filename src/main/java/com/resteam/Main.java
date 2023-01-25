@@ -5,21 +5,17 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.translate.AmazonTranslate;
 import com.amazonaws.services.translate.AmazonTranslateClient;
-import com.amazonaws.services.translate.model.TranslateTextRequest;
-import com.amazonaws.services.translate.model.TranslateTextResult;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import javafx.scene.image.Image;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.ProfileCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClient;
-import software.amazon.awssdk.services.cognitoidentity.CognitoIdentityClientBuilder;
 import software.amazon.awssdk.services.cognitoidentityprovider.CognitoIdentityProviderClient;
 import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClient;
 
@@ -37,7 +33,6 @@ public class Main extends Application {
     public static String login;
     public static String password;
     public static String token;
-
     public static String steamID;
 
     //Database variables
@@ -98,7 +93,7 @@ public class Main extends Application {
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredsPersonalize))
                 .build();
 
-        //TODO TESTY PERSONALIZE
+        //TESTY PERSONALIZE
         //getRecsDebug(personalizeRuntimeClient,"arn:aws:personalize:eu-west-1:151479359615:campaign/Resteam", "309188905");
 
         //Połączenie z DB
@@ -106,8 +101,6 @@ public class Main extends Application {
                 "jdbc:mariadb://resteam-db2.cysgqma8u6h9.eu-central-1.rds.amazonaws.com:3306/resteam",
                 "resteam", "H54z1$9uP$H"
         );
-
-
 
         System.out.println("Finished startup...");
     }

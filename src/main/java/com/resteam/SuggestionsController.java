@@ -2,7 +2,6 @@ package com.resteam;
 
 import com.amazonaws.services.translate.model.TranslateTextRequest;
 import com.amazonaws.services.translate.model.TranslateTextResult;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +12,6 @@ import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClie
 import software.amazon.awssdk.services.personalizeruntime.model.GetRecommendationsRequest;
 import software.amazon.awssdk.services.personalizeruntime.model.GetRecommendationsResponse;
 import software.amazon.awssdk.services.personalizeruntime.model.PredictedItem;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -93,11 +91,9 @@ public class SuggestionsController {
                         .withTargetLanguageCode("pl");
 
                 TranslateTextResult resultDescriptionTranslation = Main.translateClient.translateText(requestDescriptionTranslation);
-//                Main.selection.setGame_description(result.getTranslatedText());
-
                 //DEBUG
                 //System.out.println(result.getTranslatedText());
-                //-----Uncomment above lines to disable translate
+                //-----Comment above lines to disable translate
 
                 //Set data about games in UI
                 desc_snippet.setText(Main.selection.getDesc_snippet());
@@ -133,7 +129,7 @@ public class SuggestionsController {
         try {
             GetRecommendationsRequest recommendationsRequest = GetRecommendationsRequest.builder()
                     .campaignArn(campaignArn)
-                    .numResults(20)
+                    .numResults(30)
                     .userId(userId)
                     .itemId("ITEM_ID")
                     .build();
@@ -177,8 +173,7 @@ public class SuggestionsController {
         //Get recommendations
         getRecsIntoList(Main.personalizeRuntimeClient,"arn:aws:personalize:eu-west-1:151479359615:campaign/Resteam", "309188905");
 
-
-        //TODO Mock data. To be replaced by AWS Personalize Recommendations.
+        //Mock data. To be replaced by AWS Personalize Recommendations.
 //        games_list.getItems().add("DOOM");
 //        games_list.getItems().add("PLAYERUNKNOWN'S BATTLEGROUNDS");
 //        games_list.getItems().add("BATTLETECH");

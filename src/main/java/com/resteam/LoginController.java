@@ -1,9 +1,5 @@
 package com.resteam;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
-import javafx.animation.PauseTransition;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -15,23 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.util.Duration;
-import org.apache.commons.lang3.StringUtils;
 import software.amazon.awssdk.services.cognitoidentityprovider.model.InitiateAuthResponse;
-
 import java.util.Objects;
-
-import static com.resteam.CognitoLogon.getCredsForIdentity;
 import static com.resteam.CognitoLogon.initiateAuth;
 
 public class LoginController {
-
     @FXML
     private Label errorField;
-
     @FXML
     private TextField usernameField;
-
     @FXML
     private PasswordField passwordField;
 
