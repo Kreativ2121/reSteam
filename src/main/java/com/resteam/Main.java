@@ -29,10 +29,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
 
-import static com.resteam.CognitoLogon.*;
-import static com.resteam.PersonalizeRecommendations.getRecs;
-import static software.amazon.awssdk.services.cognitoidentityprovider.model.UserStatusType.FORCE_CHANGE_PASSWORD;
-
 public class Main extends Application {
     public static Parent root;
     public static Stage stage;
@@ -41,6 +37,8 @@ public class Main extends Application {
     public static String login;
     public static String password;
     public static String token;
+
+    public static String steamID;
 
     //Database variables
     public static Connection connection;
@@ -52,8 +50,8 @@ public class Main extends Application {
     //AWS Cognito variables
     public CognitoIdentityClient cognitoClient;
     public static CognitoIdentityProviderClient cognitoProviderClient;
-
     public static AmazonTranslate translateClient;
+    public static PersonalizeRuntimeClient personalizeRuntimeClient;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -95,19 +93,21 @@ public class Main extends Application {
 
         //Launching Amazon Personalize Client
         AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("AKIASGRG7TB7UWVMWHFR","Sqp+WaiRL8bRHflSCwIKuw+qBSEq1blh/qnsUvCT");
-        PersonalizeRuntimeClient personalizeRuntimeClient = PersonalizeRuntimeClient.builder()
+        personalizeRuntimeClient = PersonalizeRuntimeClient.builder()
                 .region(Region.EU_WEST_1)
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredsPersonalize))
                 .build();
 
         //TODO TESTY PERSONALIZE
-        //getRecs(personalizeRuntimeClient,"arn:aws:personalize:eu-central-1:504768181719:campaign/movieLensCampaign", "125");
+        //getRecsDebug(personalizeRuntimeClient,"arn:aws:personalize:eu-west-1:151479359615:campaign/Resteam", "309188905");
 
         //Połączenie z DB
         connection = DriverManager.getConnection(
                 "jdbc:mariadb://resteam-db2.cysgqma8u6h9.eu-central-1.rds.amazonaws.com:3306/resteam",
                 "resteam", "H54z1$9uP$H"
         );
+
+
 
         System.out.println("Finished startup...");
     }

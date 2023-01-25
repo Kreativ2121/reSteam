@@ -8,10 +8,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.services.personalizeruntime.PersonalizeRuntimeClient;
+import software.amazon.awssdk.services.personalizeruntime.model.GetRecommendationsRequest;
+import software.amazon.awssdk.services.personalizeruntime.model.GetRecommendationsResponse;
+import software.amazon.awssdk.services.personalizeruntime.model.PredictedItem;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 public class SuggestionsController {
@@ -32,7 +38,7 @@ public class SuggestionsController {
     @FXML
     private Label game_name;
     @FXML
-    private ListView<String> games_list;
+    public ListView<String> games_list;
     @FXML
     private Label minimum_requirements;
     @FXML
@@ -123,8 +129,29 @@ public class SuggestionsController {
 
     }
 
+    public void getRecsIntoList(PersonalizeRuntimeClient personalizeRuntimeClient, String campaignArn, String userId){
+        try {
+            GetRecommendationsRequest recommendationsRequest = GetRecommendationsRequest.builder()
+                    .campaignArn(campaignArn)
+                    .numResults(20)
+                    .userId(userId)
+                    .itemId("ITEM_ID")
+                    .build();
+
+            GetRecommendationsResponse recommendationsResponse = personalizeRuntimeClient.getRecommendations(recommendationsRequest);
+            List<PredictedItem> items = recommendationsResponse.itemList();
+            for (PredictedItem item: items) {
+                games_list.getItems().add(item.itemId());
+            }
+        } catch (AwsServiceException e) {
+            System.err.println(e.awsErrorDetails().errorMessage());
+            System.exit(1);
+        }
+    }
+
     @FXML
     void initialize(){
+        //Setting initial data
         customer_name.setText(Main.login + "!");
 
         desc_snippet.setText("");
@@ -138,37 +165,50 @@ public class SuggestionsController {
         recommended_requirements.setText("");
         release_date.setText("");
 
+        //Connecting recommendations to the user - mock version
+        if(Main.login.equals("Kreativ")){
+            Main.steamID="309404240";
+        } else if(Main.login.equals("Alicja")){
+            Main.steamID="309188905";
+        } else {
+            Main.steamID="309052991";
+        }
+
+        //Get recommendations
+        getRecsIntoList(Main.personalizeRuntimeClient,"arn:aws:personalize:eu-west-1:151479359615:campaign/Resteam", "309188905");
+
+
         //TODO Mock data. To be replaced by AWS Personalize Recommendations.
-        games_list.getItems().add("DOOM");
-        games_list.getItems().add("PLAYERUNKNOWN'S BATTLEGROUNDS");
-        games_list.getItems().add("BATTLETECH");
-        games_list.getItems().add("Golf It!");
-        games_list.getItems().add("Cities: Skylines Collection");
-        games_list.getItems().add("UNO");
-        games_list.getItems().add("NieR:Automata");
-        games_list.getItems().add("BeamNG.drive");
-        games_list.getItems().add("Pavlov VR");
-        games_list.getItems().add("Wreckfest");
-        games_list.getItems().add("Garry's Mod");
-        games_list.getItems().add("Overcooked! 2");
-        games_list.getItems().add("Black Desert Online");
-        games_list.getItems().add("Dota 2");
-        games_list.getItems().add("Abandon Ship");
-        games_list.getItems().add("rFactor 2");
-        games_list.getItems().add("Rocksmith");
-        games_list.getItems().add("FINAL FANTASY XIII");
-        games_list.getItems().add("911 Operator");
-        games_list.getItems().add("Mass Effect 2 Digital Deluxe Edition");
-        games_list.getItems().add("GRID 2");
-        games_list.getItems().add("Deus Ex: Mankind Divided");
-        games_list.getItems().add("Sword Art Online: Fatal Bullet");
-        games_list.getItems().add("Left 4 Dead");
-        games_list.getItems().add("Dishonored - Definitive Edition");
-        games_list.getItems().add("Grand Theft Auto: San Andreas");
-        games_list.getItems().add("Metro Redux Bundle");
-        games_list.getItems().add("Killing Floor");
-        games_list.getItems().add("Need For Speed: Hot Pursuit");
-        games_list.getItems().add("Serious Sam VR: The Last Hope");
+//        games_list.getItems().add("DOOM");
+//        games_list.getItems().add("PLAYERUNKNOWN'S BATTLEGROUNDS");
+//        games_list.getItems().add("BATTLETECH");
+//        games_list.getItems().add("Golf It!");
+//        games_list.getItems().add("Cities: Skylines Collection");
+//        games_list.getItems().add("UNO");
+//        games_list.getItems().add("NieR:Automata");
+//        games_list.getItems().add("BeamNG.drive");
+//        games_list.getItems().add("Pavlov VR");
+//        games_list.getItems().add("Wreckfest");
+//        games_list.getItems().add("Garry's Mod");
+//        games_list.getItems().add("Overcooked! 2");
+//        games_list.getItems().add("Black Desert Online");
+//        games_list.getItems().add("Dota 2");
+//        games_list.getItems().add("Abandon Ship");
+//        games_list.getItems().add("rFactor 2");
+//        games_list.getItems().add("Rocksmith");
+//        games_list.getItems().add("FINAL FANTASY XIII");
+//        games_list.getItems().add("911 Operator");
+//        games_list.getItems().add("Mass Effect 2 Digital Deluxe Edition");
+//        games_list.getItems().add("GRID 2");
+//        games_list.getItems().add("Deus Ex: Mankind Divided");
+//        games_list.getItems().add("Sword Art Online: Fatal Bullet");
+//        games_list.getItems().add("Left 4 Dead");
+//        games_list.getItems().add("Dishonored - Definitive Edition");
+//        games_list.getItems().add("Grand Theft Auto: San Andreas");
+//        games_list.getItems().add("Metro Redux Bundle");
+//        games_list.getItems().add("Killing Floor");
+//        games_list.getItems().add("Need For Speed: Hot Pursuit");
+//        games_list.getItems().add("Serious Sam VR: The Last Hope");
     }
 
 }

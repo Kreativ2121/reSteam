@@ -9,12 +9,12 @@ import software.amazon.awssdk.services.personalizeruntime.model.PredictedItem;
 import java.util.List;
 
 public class PersonalizeRecommendations {
-    public static void getRecs(PersonalizeRuntimeClient personalizeRuntimeClient, String campaignArn, String userId){
+    public static void getRecsDebug(PersonalizeRuntimeClient personalizeRuntimeClient, String campaignArn, String userId){
 
         try {
             GetRecommendationsRequest recommendationsRequest = GetRecommendationsRequest.builder()
                     .campaignArn(campaignArn)
-                    .numResults(5)
+                    .numResults(20)
                     .userId(userId)
                     .itemId("ITEM_ID")
                     .build();
