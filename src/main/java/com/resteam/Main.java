@@ -80,26 +80,23 @@ public class Main extends Application {
                 .build();
 
         //Launching Amazon Translate Client
-        BasicAWSCredentials awsCreds = new BasicAWSCredentials("AKIAXLBUHGXL654LLVPN", "3P+xPGAeoK9ndjRRFl75XLbGIooxAHyyqZP8AJvT");
+        BasicAWSCredentials awsCreds = new BasicAWSCredentials("xxxxx", "yyyyy");
         translateClient = AmazonTranslateClient.builder()
                 .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
                 .withRegion(Regions.EU_WEST_1)
                 .build();
 
         //Launching Amazon Personalize Client
-        AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("AKIASGRG7TB7UWVMWHFR","Sqp+WaiRL8bRHflSCwIKuw+qBSEq1blh/qnsUvCT");
+        AwsBasicCredentials awsCredsPersonalize = AwsBasicCredentials.create("xxxxx","yyyyy");
         personalizeRuntimeClient = PersonalizeRuntimeClient.builder()
                 .region(Region.EU_WEST_1)
                 .credentialsProvider(StaticCredentialsProvider.create(awsCredsPersonalize))
                 .build();
 
-        //TESTY PERSONALIZE
-        //getRecsDebug(personalizeRuntimeClient,"arn:aws:personalize:eu-west-1:151479359615:campaign/Resteam", "309188905");
-
         //Połączenie z DB
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://resteam-db2.cysgqma8u6h9.eu-central-1.rds.amazonaws.com:3306/resteam",
-                "resteam", "H54z1$9uP$H"
+                "jdbc:mariadb://xxxxxxx:3306/resteam",
+                "resteam", "xxxxxxxxxxx"
         );
 
         System.out.println("Finished startup...");
